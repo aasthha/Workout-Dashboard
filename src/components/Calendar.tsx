@@ -12,6 +12,8 @@ import {
   isSameDay, 
   isToday 
 } from "date-fns";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
 
 interface CalendarProps {
   currentDate: Date;
@@ -21,14 +23,23 @@ interface CalendarProps {
 }
 
 export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: CalendarProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(monthStart);
-  const startDate = startOfWeek(monthStart);
-  const endDate = endOfWeek(monthEnd);
+  
+  // Calculate full month days
+  const monthStartDate = startOfWeek(monthStart);
+  const monthEndDate = endOfWeek(monthEnd);
+  
+  // Calculate current week days based on selectedDate or currentDate
+  const activeDate = selectedDate || currentDate;
+  const weekStartDate = startOfWeek(activeDate);
+  const weekEndDate = endOfWeek(activeDate);
 
   const days = eachDayOfInterval({
-    start: startDate,
-    end: endDate
+    start: isExpanded ? monthStartDate : weekStartDate,
+    end: isExpanded ? monthEndDate : weekEndDate
   });
 
   const getCategoryColor = (category: WorkoutCategory) => {
@@ -48,6 +59,16 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
         <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
           {format(currentDate, "MMMM yyyy")}
         </h2>
+        <button 
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center gap-1 text-xs font-semibold text-white/50 hover:text-white transition-colors bg-white/5 px-3 py-1.5 rounded-full"
+        >
+          {isExpanded ? (
+            <>Collapse <ChevronUp size={14} /></>
+          ) : (
+            <>Expand <ChevronDown size={14} /></>
+          )}
+        </button>
       </div>
       
       <div className="grid grid-cols-7 gap-1 md:gap-2 mb-2">
