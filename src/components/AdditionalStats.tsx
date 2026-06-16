@@ -50,12 +50,12 @@ export function AdditionalStats({ totalWorkouts, workoutsThisMonth, currentStrea
       {stats.map((stat, idx) => {
         const Icon = stat.icon;
         return (
-          <div key={idx} className={`p-5 rounded-2xl border ${stat.border} bg-[#1e222a] flex items-center gap-4 transition-transform hover:-translate-y-1 duration-300`}>
-            <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
-              <Icon size={24} />
+          <div key={idx} className={`p-4 md:p-5 rounded-2xl border ${stat.border} bg-[#1e222a] flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 transition-transform hover:-translate-y-1 duration-300`}>
+            <div className={`p-2.5 sm:p-3 rounded-xl ${stat.bg} ${stat.color}`}>
+              <Icon size={22} className="sm:w-6 sm:h-6" />
             </div>
             <div>
-              <div className="text-2xl font-black text-white">{stat.value}</div>
+              <div className="text-xl sm:text-2xl font-black text-white">{stat.value}</div>
               <div className="text-xs text-white/50 font-medium uppercase tracking-wider">{stat.label}</div>
             </div>
           </div>

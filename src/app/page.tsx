@@ -163,13 +163,13 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen p-4 md:p-8 max-w-6xl mx-auto flex flex-col gap-8">
-      <header className="flex items-center justify-between mt-4">
+    <main className="min-h-screen p-3 sm:p-4 md:p-8 max-w-6xl mx-auto flex flex-col gap-6 md:gap-8">
+      <header className="flex items-center justify-between mt-2 md:mt-4">
         <div>
-          <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 tracking-tight mb-1">
+          <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 tracking-tight mb-1">
             Workout Tracker
           </h1>
-          <p className="text-white/40 font-medium">Your personal fitness dashboard</p>
+          <p className="text-white/40 text-sm md:text-base font-medium">Your personal fitness dashboard</p>
         </div>
       </header>
 

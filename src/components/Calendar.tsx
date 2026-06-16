@@ -43,9 +43,9 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
   };
 
   return (
-    <div className="w-full bg-[#1e222a] border border-[#2d333b] rounded-2xl p-4 md:p-6 shadow-xl">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-white tracking-tight">
+    <div className="w-full bg-[#1e222a] border border-[#2d333b] rounded-2xl p-3 sm:p-4 md:p-6 shadow-xl">
+      <div className="flex justify-between items-center mb-4 md:mb-6">
+        <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
           {format(currentDate, "MMMM yyyy")}
         </h2>
       </div>
@@ -69,7 +69,7 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
               key={day.toString()}
               onClick={() => onSelectDay(day)}
               className={`
-                min-h-[80px] p-1 md:p-2 rounded-xl cursor-pointer transition-all duration-200 border flex flex-col
+                min-h-[64px] md:min-h-[80px] p-1.5 md:p-2 rounded-xl cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
                 ${!isSameMonth(day, monthStart) ? 'opacity-30 bg-[#1e222a] border-transparent' : 'bg-[#252a34] border-[#374151] hover:border-white/30'}
                 ${isSelected ? 'ring-2 ring-white border-white scale-105 z-10' : ''}
                 ${isToday(day) && !isSelected ? 'border-blue-500/50 bg-blue-500/5' : ''}
