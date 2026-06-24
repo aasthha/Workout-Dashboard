@@ -29,13 +29,6 @@ export function WorkoutLoggingPanel({
 
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-xl p-3 shadow-xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
-      <button 
-        onClick={onClose}
-        className="absolute top-2 right-2 text-gray-500 hover:text-white transition-colors bg-white/5 p-1 rounded-full hover:bg-white/10"
-      >
-        <X size={16} />
-      </button>
-
       <div className="mb-2">
         <h3 className="text-base font-bold text-white mb-0">Log Workout</h3>
         <p className="text-gray-400 text-[10px] font-medium">{format(selectedDate, "EEEE, MMMM do, yyyy")}</p>
