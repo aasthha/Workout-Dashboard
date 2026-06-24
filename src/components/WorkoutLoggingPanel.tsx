@@ -55,7 +55,6 @@ export function WorkoutLoggingPanel({
               key={category}
               onClick={() => onToggleWorkout(category)}
               className={`
-              className={`
                 flex-1 min-w-[30%] flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-200 group
                 ${getCategoryStyles(category, isActive)}
               `}
