@@ -2,6 +2,7 @@
 
 import { WorkoutCategory } from "@/lib/supabase";
 import { formatDistanceToNow, differenceInDays } from "date-fns";
+import { CATEGORY_COLORS } from "@/lib/colors";
 
 interface CategoryStat {
   category: WorkoutCategory;
@@ -31,8 +32,11 @@ export function DashboardStats({ stats }: { stats: CategoryStat[] }) {
               {stat.totalLogs}
             </div>
             
-            <div className="text-[11px] text-gray-400 font-semibold uppercase tracking-wider mb-2">
-              {stat.category}
+            <div className="flex items-center gap-1.5 mb-2">
+              <div className={`w-1.5 h-1.5 rounded-full ${CATEGORY_COLORS[stat.category].dot}`} />
+              <div className="text-[11px] text-gray-400 font-semibold uppercase tracking-wider">
+                {stat.category}
+              </div>
             </div>
             
             <div className="text-[10px] text-gray-500 font-medium">

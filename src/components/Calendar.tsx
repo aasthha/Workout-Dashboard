@@ -14,6 +14,7 @@ import {
 } from "date-fns";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
+import { CATEGORY_COLORS } from "@/lib/colors";
 
 interface CalendarProps {
   currentDate: Date;
@@ -62,6 +63,15 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
         </button>
       </div>
       
+      <div className="flex justify-center items-center gap-3 mb-2 px-1">
+        {(Object.keys(CATEGORY_COLORS) as WorkoutCategory[]).map(cat => (
+          <div key={cat} className="flex items-center gap-1">
+            <div className={`w-1.5 h-1.5 rounded-full ${CATEGORY_COLORS[cat].dot}`} />
+            <span className="text-[9px] text-gray-500 font-medium uppercase tracking-wider">{cat}</span>
+          </div>
+        ))}
+      </div>
+      
       <div className="grid grid-cols-7 gap-1 md:gap-2 mb-2">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
           <div key={day} className="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -87,7 +97,7 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
                   : !isSameMonth(day, monthStart) 
                     ? 'opacity-30 bg-gray-800 border-transparent' 
                     : dayWorkouts.length > 0 
-                      ? 'bg-gray-600 border-gray-500 hover:border-gray-400' 
+                      ? 'bg-gray-700 border-gray-600 hover:border-gray-500' 
                       : 'bg-gray-800 border-gray-700 hover:border-gray-600'
                 }
                 ${isToday(day) && !isSelected ? 'border-emerald-500/50' : ''}
@@ -97,6 +107,18 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
                 <span className={`text-xs font-medium ${isSelected ? 'text-white' : isToday(day) ? 'text-emerald-400 font-bold' : 'text-gray-300'}`}>
                   {format(day, 'd')}
                 </span>
+              </div>
+              
+              <div className="mt-auto pt-1 flex justify-center items-center gap-0.5">
+                {dayWorkouts.slice(0, 3).map((workout, idx) => (
+                  <div 
+                    key={idx}
+                    className={`w-1.5 h-1.5 rounded-full ${CATEGORY_COLORS[workout]?.dot || 'bg-gray-500'}`}
+                  />
+                ))}
+                {dayWorkouts.length > 3 && (
+                  <span className="text-[8px] font-bold text-gray-400 ml-0.5 leading-none">+{dayWorkouts.length - 3}</span>
+                )}
               </div>
             </div>
           );

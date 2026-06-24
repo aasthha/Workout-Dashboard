@@ -3,6 +3,7 @@
 import { WorkoutCategory } from "@/lib/supabase";
 import { format } from "date-fns";
 import { Check, X } from "lucide-react";
+import { CATEGORY_COLORS } from "@/lib/colors";
 
 interface WorkoutLoggingPanelProps {
   selectedDate: Date;
@@ -20,9 +21,10 @@ export function WorkoutLoggingPanel({
   onClose
 }: WorkoutLoggingPanelProps) {
   
-  const getCategoryStyles = (isActive: boolean) => {
+  const getCategoryStyles = (category: WorkoutCategory, isActive: boolean) => {
     if (!isActive) return "bg-gray-900 border-gray-700 text-gray-400 hover:bg-gray-700 hover:border-gray-600";
-    return "bg-emerald-500/20 text-emerald-400 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.15)]";
+    const colors = CATEGORY_COLORS[category];
+    return `${colors.activeBg} ${colors.text} ${colors.border}`;
   };
 
   return (
@@ -48,12 +50,12 @@ export function WorkoutLoggingPanel({
               onClick={() => onToggleWorkout(category)}
               className={`
                 flex-1 min-w-[30%] flex items-center justify-between p-2 rounded-lg border-2 transition-all duration-200 group
-                ${getCategoryStyles(isActive)}
+                ${getCategoryStyles(category, isActive)}
               `}
             >
               <span className="font-bold tracking-wide text-sm">{category}</span>
-              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${isActive ? 'border-emerald-500 bg-emerald-500/20' : 'border-gray-600 group-hover:border-gray-500'}`}>
-                {isActive && <Check size={10} strokeWidth={3} className="text-emerald-500" />}
+              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${isActive ? `${CATEGORY_COLORS[category].border} ${CATEGORY_COLORS[category].activeBg}` : 'border-gray-600 group-hover:border-gray-500'}`}>
+                {isActive && <Check size={10} strokeWidth={3} className={CATEGORY_COLORS[category].text} />}
               </div>
             </button>
           );
