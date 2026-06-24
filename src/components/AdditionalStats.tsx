@@ -13,16 +13,16 @@ export function AdditionalStats({
 }: AdditionalStatsProps) {
   const stats = [
     {
-      label: "Total Workouts",
-      value: totalWorkouts,
-      icon: Dumbbell,
+      label: "This Month",
+      value: workoutsThisMonth,
+      icon: Calendar,
       color: "text-emerald-400",
       bg: "bg-emerald-500/10"
     },
     {
-      label: "This Month",
-      value: workoutsThisMonth,
-      icon: Calendar,
+      label: "Total Workouts",
+      value: totalWorkouts,
+      icon: Dumbbell,
       color: "text-emerald-400",
       bg: "bg-emerald-500/10"
     }

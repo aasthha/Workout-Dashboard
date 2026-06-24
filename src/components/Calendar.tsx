@@ -83,7 +83,7 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
               key={day.toString()}
               onClick={() => onSelectDay(day)}
               className={`
-                min-h-[50px] p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
+                min-h-[42px] p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
                 ${isSelected 
                   ? 'bg-emerald-500 text-white border-emerald-500 scale-105 z-10 shadow-lg shadow-emerald-500/20'
                   : !isSameMonth(day, monthStart) 
