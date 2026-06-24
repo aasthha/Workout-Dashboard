@@ -33,17 +33,17 @@ export function WorkoutLoggingPanel({
   };
 
   return (
-    <div className="bg-[#1e222a] border border-[#2d333b] rounded-2xl p-6 shadow-xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+    <div className="bg-[#1e222a] border border-[#2d333b] rounded-xl p-3 shadow-xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
       <button 
         onClick={onClose}
-        className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors bg-white/5 p-2 rounded-full hover:bg-white/10"
+        className="absolute top-2 right-2 text-white/40 hover:text-white transition-colors bg-white/5 p-1 rounded-full hover:bg-white/10"
       >
-        <X size={20} />
+        <X size={16} />
       </button>
 
-      <div className="mb-6">
-        <h3 className="text-xl font-bold text-white mb-1">Log Workout</h3>
-        <p className="text-white/50 text-sm font-medium">{format(selectedDate, "EEEE, MMMM do, yyyy")}</p>
+      <div className="mb-2">
+        <h3 className="text-base font-bold text-white mb-0">Log Workout</h3>
+        <p className="text-white/50 text-[10px] font-medium">{format(selectedDate, "EEEE, MMMM do, yyyy")}</p>
       </div>
       
       <div className="flex flex-wrap gap-2">
@@ -54,13 +54,13 @@ export function WorkoutLoggingPanel({
               key={category}
               onClick={() => onToggleWorkout(category)}
               className={`
-                flex-1 min-w-[30%] flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-200 group
+                flex-1 min-w-[30%] flex items-center justify-between p-2 rounded-lg border-2 transition-all duration-200 group
                 ${getCategoryStyles(category, isActive)}
               `}
             >
-              <span className="font-bold tracking-wide text-base">{category}</span>
-              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${isActive ? 'border-white bg-white/20' : 'border-white/20 group-hover:border-white/40'}`}>
-                {isActive && <Check size={14} strokeWidth={3} className="text-white" />}
+              <span className="font-bold tracking-wide text-sm">{category}</span>
+              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${isActive ? 'border-white bg-white/20' : 'border-white/20 group-hover:border-white/40'}`}>
+                {isActive && <Check size={10} strokeWidth={3} className="text-white" />}
               </div>
             </button>
           );

@@ -53,9 +53,9 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
   };
 
   return (
-    <div className="w-full bg-[#1e222a] border border-[#2d333b] rounded-2xl p-3 sm:p-4 md:p-6 shadow-xl">
-      <div className="flex justify-between items-center mb-4 md:mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+    <div className="w-full bg-[#1e222a] border border-[#2d333b] rounded-xl p-2 shadow-xl">
+      <div className="flex justify-between items-center mb-2 px-1">
+        <h2 className="text-base font-bold text-white tracking-tight">
           {format(currentDate, "MMMM yyyy")}
         </h2>
         <button 
@@ -89,14 +89,14 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
               key={day.toString()}
               onClick={() => onSelectDay(day)}
               className={`
-                min-h-[64px] md:min-h-[80px] p-1.5 md:p-2 rounded-xl cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
+                min-h-[50px] p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
                 ${!isSameMonth(day, monthStart) ? 'opacity-30 bg-[#1e222a] border-transparent' : 'bg-[#252a34] border-[#374151] hover:border-white/30'}
                 ${isSelected ? 'ring-2 ring-white border-white scale-105 z-10' : ''}
                 ${isToday(day) && !isSelected ? 'border-blue-500/50 bg-blue-500/5' : ''}
               `}
             >
-              <div className="flex justify-between items-start">
-                <span className={`text-sm font-medium ${isToday(day) ? 'text-blue-400 font-bold' : 'text-white/80'}`}>
+              <div className="flex justify-center items-start">
+                <span className={`text-xs font-medium ${isToday(day) ? 'text-blue-400 font-bold' : 'text-white/80'}`}>
                   {format(day, 'd')}
                 </span>
               </div>

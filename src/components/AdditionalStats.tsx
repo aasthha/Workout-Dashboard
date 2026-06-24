@@ -35,13 +35,13 @@ export function AdditionalStats({
       {stats.map((stat, idx) => {
         const Icon = stat.icon;
         return (
-          <div key={idx} className={`p-3 md:p-5 rounded-2xl border ${stat.border} bg-[#1e222a] flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 transition-transform hover:-translate-y-1 duration-300`}>
-            <div className={`p-2.5 sm:p-3 rounded-xl ${stat.bg} ${stat.color}`}>
-              <Icon size={22} className="sm:w-6 sm:h-6" />
+          <div key={idx} className={`p-2 rounded-xl border ${stat.border} bg-[#1e222a] flex items-center justify-center gap-2 transition-transform hover:-translate-y-1 duration-300`}>
+            <div className={`p-1.5 rounded-lg ${stat.bg} ${stat.color}`}>
+              <Icon size={16} />
             </div>
-            <div>
-              <div className="text-xl sm:text-2xl font-black text-white">{stat.value}</div>
-              <div className="text-xs text-white/50 font-medium uppercase tracking-wider">{stat.label}</div>
+            <div className="flex flex-col">
+              <div className="text-sm font-black text-white leading-none">{stat.value}</div>
+              <div className="text-[9px] text-white/50 font-medium uppercase tracking-wider">{stat.label}</div>
             </div>
           </div>
         );

@@ -117,22 +117,13 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-[100dvh] p-2 sm:p-4 md:p-8 max-w-6xl w-full mx-auto flex flex-col gap-3 md:gap-8 overflow-x-hidden">
-      <header className="flex items-center justify-between mt-1 md:mt-4 px-1">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 tracking-tight mb-1">
-            Workout Tracker
-          </h1>
-          <p className="text-white/40 text-sm md:text-base font-medium">Your personal fitness dashboard</p>
-        </div>
-      </header>
-
-      <section className="w-full min-w-0">
+    <main className="min-h-[100dvh] p-2 max-w-6xl w-full mx-auto flex flex-col gap-2 overflow-hidden bg-[#0f1115]">
+      <section className="w-full min-w-0 mt-2">
         <DashboardStats stats={dashboardStats} />
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 w-full min-w-0">
-        <div className="lg:col-span-2">
+      <section className="grid grid-cols-1 gap-2 w-full min-w-0">
+        <div className="w-full">
           <Calendar 
             currentDate={new Date()} 
             workouts={calendarWorkouts} 
