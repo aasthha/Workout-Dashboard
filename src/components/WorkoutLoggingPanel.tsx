@@ -21,8 +21,8 @@ export function WorkoutLoggingPanel({
 }: WorkoutLoggingPanelProps) {
   
   const getCategoryStyles = (isActive: boolean) => {
-    if (!isActive) return "bg-gray-800 border-gray-700 text-gray-500 hover:bg-gray-700 hover:border-gray-600";
-    return "bg-emerald-500/10 text-emerald-500 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.1)]";
+    if (!isActive) return "bg-gray-900 border-gray-700 text-gray-400 hover:bg-gray-700 hover:border-gray-600";
+    return "bg-emerald-500/20 text-emerald-400 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.15)]";
   };
 
   return (

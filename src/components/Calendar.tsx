@@ -82,9 +82,14 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
               onClick={() => onSelectDay(day)}
               className={`
                 min-h-[50px] p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
-                ${!isSameMonth(day, monthStart) ? 'opacity-30 bg-gray-800 border-transparent' : 
-                  dayWorkouts.length > 0 ? 'bg-gray-700 border-gray-600 hover:border-gray-500' : 'bg-gray-800 border-gray-700 hover:border-gray-600'}
-                ${isSelected ? 'bg-emerald-500 text-white border-emerald-500 scale-105 z-10 shadow-lg shadow-emerald-500/20' : ''}
+                ${isSelected 
+                  ? 'bg-emerald-500 text-white border-emerald-500 scale-105 z-10 shadow-lg shadow-emerald-500/20'
+                  : !isSameMonth(day, monthStart) 
+                    ? 'opacity-30 bg-gray-800 border-transparent' 
+                    : dayWorkouts.length > 0 
+                      ? 'bg-gray-600 border-gray-500 hover:border-gray-400' 
+                      : 'bg-gray-800 border-gray-700 hover:border-gray-600'
+                }
                 ${isToday(day) && !isSelected ? 'border-emerald-500/50' : ''}
               `}
             >
