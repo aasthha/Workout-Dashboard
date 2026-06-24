@@ -30,15 +30,14 @@ export function DashboardStats({ stats }: { stats: CategoryStat[] }) {
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 w-full">
+    <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 md:gap-4 w-full pb-2 md:grid md:grid-cols-5 md:overflow-visible hide-scrollbar">
       {stats.map((stat, idx) => {
         const recovery = getRecoveryStatus(stat.lastTrainedDate);
-        // Make the 5th item span both columns on mobile
-        const mobileSpanClass = idx === 4 ? "col-span-2 md:col-span-1" : "";
+        // Removed mobile grid span logic
         return (
           <div 
             key={stat.category} 
-            className={`p-3 md:p-4 rounded-xl border flex flex-col items-center justify-center text-center transition-all active:scale-95 md:hover:scale-105 duration-300 ${getCategoryColor(stat.category)} ${mobileSpanClass}`}
+            className={`min-w-[140px] flex-shrink-0 snap-center p-3 md:p-4 rounded-xl border flex flex-col items-center justify-center text-center transition-all active:scale-95 md:hover:scale-105 duration-300 ${getCategoryColor(stat.category)}`}
           >
             <div className="w-full flex justify-between items-center mb-1 md:mb-2">
               <span className="font-bold text-base md:text-lg">{stat.category}</span>

@@ -46,11 +46,11 @@ export function AdditionalStats({ totalWorkouts, workoutsThisMonth, currentStrea
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+    <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 md:gap-4 w-full pb-2 md:grid md:grid-cols-4 md:overflow-visible hide-scrollbar">
       {stats.map((stat, idx) => {
         const Icon = stat.icon;
         return (
-          <div key={idx} className={`p-4 md:p-5 rounded-2xl border ${stat.border} bg-[#1e222a] flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 transition-transform hover:-translate-y-1 duration-300`}>
+          <div key={idx} className={`min-w-[150px] flex-shrink-0 snap-center p-3 md:p-5 rounded-2xl border ${stat.border} bg-[#1e222a] flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 transition-transform hover:-translate-y-1 duration-300`}>
             <div className={`p-2.5 sm:p-3 rounded-xl ${stat.bg} ${stat.color}`}>
               <Icon size={22} className="sm:w-6 sm:h-6" />
             </div>

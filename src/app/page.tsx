@@ -163,8 +163,8 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen p-3 sm:p-4 md:p-8 max-w-6xl mx-auto flex flex-col gap-6 md:gap-8">
-      <header className="flex items-center justify-between mt-2 md:mt-4">
+    <main className="min-h-[100dvh] p-2 sm:p-4 md:p-8 max-w-6xl mx-auto flex flex-col gap-3 md:gap-8">
+      <header className="flex items-center justify-between mt-1 md:mt-4 px-1">
         <div>
           <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 tracking-tight mb-1">
             Workout Tracker
@@ -177,7 +177,7 @@ export default function Home() {
         <DashboardStats stats={dashboardStats} />
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6">
         <div className="lg:col-span-2">
           <Calendar 
             currentDate={new Date()} 

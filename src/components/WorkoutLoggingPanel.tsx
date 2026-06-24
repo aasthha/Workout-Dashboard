@@ -47,7 +47,7 @@ export function WorkoutLoggingPanel({
         <p className="text-white/50 text-sm font-medium">{format(selectedDate, "EEEE, MMMM do, yyyy")}</p>
       </div>
       
-      <div className="grid grid-cols-1 gap-3">
+      <div className="flex flex-wrap gap-2">
         {CATEGORIES.map(category => {
           const isActive = existingWorkouts.includes(category);
           return (
@@ -55,11 +55,12 @@ export function WorkoutLoggingPanel({
               key={category}
               onClick={() => onToggleWorkout(category)}
               className={`
-                flex items-center justify-between p-4 rounded-xl border-2 transition-all duration-200 group
+              className={`
+                flex-1 min-w-[30%] flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-200 group
                 ${getCategoryStyles(category, isActive)}
               `}
             >
-              <span className="font-bold tracking-wide text-lg">{category}</span>
+              <span className="font-bold tracking-wide text-base">{category}</span>
               <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${isActive ? 'border-white bg-white/20' : 'border-white/20 group-hover:border-white/40'}`}>
                 {isActive && <Check size={14} strokeWidth={3} className="text-white" />}
               </div>
