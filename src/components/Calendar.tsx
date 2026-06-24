@@ -63,15 +63,7 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
         </button>
       </div>
       
-      <div className="flex justify-center items-center gap-3 mb-2 px-1">
-        {(Object.keys(CATEGORY_COLORS) as WorkoutCategory[]).map(cat => (
-          <div key={cat} className="flex items-center gap-1">
-            <div className={`w-1.5 h-1.5 rounded-full ${CATEGORY_COLORS[cat].dot}`} />
-            <span className="text-[9px] text-gray-500 font-medium uppercase tracking-wider">{cat}</span>
-          </div>
-        ))}
-      </div>
-      
+
       <div className="grid grid-cols-7 gap-1 md:gap-2 mb-2">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
           <div key={day} className="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -96,9 +88,11 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
                   ? 'bg-emerald-500 text-white border-emerald-500 scale-105 z-10 shadow-lg shadow-emerald-500/20'
                   : !isSameMonth(day, monthStart) 
                     ? 'opacity-30 bg-gray-800 border-transparent' 
-                    : dayWorkouts.length > 0 
-                      ? 'bg-gray-700 border-gray-600 hover:border-gray-500' 
-                      : 'bg-gray-800 border-gray-700 hover:border-gray-600'
+                    : dayWorkouts.length === 1 
+                      ? `${CATEGORY_COLORS[dayWorkouts[0]].activeBg} ${CATEGORY_COLORS[dayWorkouts[0]].border} hover:brightness-110` 
+                      : dayWorkouts.length > 1
+                        ? 'bg-gray-700 border-gray-600 hover:border-gray-500'
+                        : 'bg-gray-800 border-gray-700 hover:border-gray-600'
                 }
                 ${isToday(day) && !isSelected ? 'border-emerald-500/50' : ''}
               `}
@@ -110,15 +104,25 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
               </div>
               
               <div className="mt-auto pt-1 flex justify-center items-center gap-0.5">
-                {dayWorkouts.slice(0, 3).map((workout, idx) => (
-                  <div 
-                    key={idx}
-                    className={`w-1.5 h-1.5 rounded-full ${CATEGORY_COLORS[workout]?.dot || 'bg-gray-500'}`}
-                  />
-                ))}
-                {dayWorkouts.length > 3 && (
-                  <span className="text-[8px] font-bold text-gray-400 ml-0.5 leading-none">+{dayWorkouts.length - 3}</span>
-                )}
+                {dayWorkouts.length === 1 ? (
+                  <span className={`text-[9px] font-bold tracking-widest ${isSelected ? 'text-white' : CATEGORY_COLORS[dayWorkouts[0]].text}`}>
+                    {CATEGORY_COLORS[dayWorkouts[0]].abbr}
+                  </span>
+                ) : dayWorkouts.length > 1 ? (
+                  <div className="flex items-center gap-0.5">
+                    {dayWorkouts.map((workout, idx) => (
+                      <div key={idx} className="flex items-center gap-0.5">
+                        <div className={`w-1 h-1 rounded-full ${isSelected ? 'bg-white' : CATEGORY_COLORS[workout].dot}`} />
+                        <span className={`text-[8px] font-bold ${isSelected ? 'text-white' : 'text-gray-300'}`}>
+                          {CATEGORY_COLORS[workout].initial}
+                        </span>
+                        {idx < dayWorkouts.length - 1 && (
+                          <span className={`text-[8px] font-bold ${isSelected ? 'text-white/70' : 'text-gray-500'}`}>+</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             </div>
           );
