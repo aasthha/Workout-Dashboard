@@ -61,12 +61,24 @@ export default function Home() {
 
   const additionalStats = useMemo(() => {
     const totalWorkouts = workouts.length;
-    const currentMonth = startOfMonth(new Date());
+    const today = new Date();
+    const currentMonth = startOfMonth(today);
+    
     const workoutsThisMonth = workouts.filter(w => isSameMonth(parseISO(w.workout_date), currentMonth)).length;
+    
+    const uniqueDaysThisMonth = new Set(
+      workouts
+        .filter(w => isSameMonth(parseISO(w.workout_date), today))
+        .map(w => w.workout_date)
+    ).size;
+    
+    const daysPassed = today.getDate();
+    const restDaysThisMonth = daysPassed - uniqueDaysThisMonth;
 
     return {
       totalWorkouts,
-      workoutsThisMonth
+      workoutsThisMonth,
+      restDaysThisMonth
     };
   }, [workouts]);
 

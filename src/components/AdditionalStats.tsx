@@ -1,15 +1,17 @@
 "use client";
 
-import { Dumbbell, Calendar } from "lucide-react";
+import { Dumbbell, Calendar, Coffee } from "lucide-react";
 
 interface AdditionalStatsProps {
   totalWorkouts: number;
   workoutsThisMonth: number;
+  restDaysThisMonth: number;
 }
 
 export function AdditionalStats({ 
   totalWorkouts, 
-  workoutsThisMonth 
+  workoutsThisMonth,
+  restDaysThisMonth
 }: AdditionalStatsProps) {
   const stats = [
     {
@@ -25,11 +27,18 @@ export function AdditionalStats({
       icon: Dumbbell,
       color: "text-emerald-400",
       bg: "bg-emerald-500/10"
+    },
+    {
+      label: "Rest Days",
+      value: restDaysThisMonth,
+      icon: Coffee,
+      color: "text-emerald-400",
+      bg: "bg-emerald-500/10"
     }
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 w-full">
+    <div className="grid grid-cols-3 gap-2 w-full">
       {stats.map((stat, idx) => {
         const Icon = stat.icon;
         return (
