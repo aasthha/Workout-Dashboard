@@ -11,7 +11,7 @@ interface WorkoutLoggingPanelProps {
   onClose: () => void;
 }
 
-const CATEGORIES: WorkoutCategory[] = ["Legs", "CST", "BB", "Arms", "Cardio"];
+const CATEGORIES: WorkoutCategory[] = ["Legs", "CST", "BB", "Cardio"];
 
 export function WorkoutLoggingPanel({ 
   selectedDate, 
@@ -27,7 +27,6 @@ export function WorkoutLoggingPanel({
       case "Legs": return "bg-purple-500 text-white border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)]";
       case "CST": return "bg-blue-500 text-white border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.4)]";
       case "BB": return "bg-green-500 text-white border-green-400 shadow-[0_0_15px_rgba(34,197,94,0.4)]";
-      case "Arms": return "bg-orange-500 text-white border-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.4)]";
       case "Cardio": return "bg-red-500 text-white border-red-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]";
       default: return "bg-gray-500 text-white border-gray-400";
     }

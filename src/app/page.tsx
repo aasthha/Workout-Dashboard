@@ -8,7 +8,7 @@ import { WorkoutLoggingPanel } from "@/components/WorkoutLoggingPanel";
 import { AdditionalStats } from "@/components/AdditionalStats";
 import { startOfMonth, isSameMonth, differenceInDays, parseISO, format, subDays } from "date-fns";
 
-const CATEGORIES: WorkoutCategory[] = ["Legs", "CST", "BB", "Arms", "Cardio"];
+const CATEGORIES: WorkoutCategory[] = ["Legs", "CST", "BB", "Cardio"];
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -64,55 +64,9 @@ export default function Home() {
     const currentMonth = startOfMonth(new Date());
     const workoutsThisMonth = workouts.filter(w => isSameMonth(parseISO(w.workout_date), currentMonth)).length;
 
-    // Calculate streaks
-    // A streak is consecutive days with AT LEAST ONE logged workout
-    const uniqueDates = [...new Set(workouts.map(w => w.workout_date))].sort();
-    
-    let currentStreak = 0;
-    let longestStreak = 0;
-    
-    if (uniqueDates.length > 0) {
-      let currentTempStreak = 1;
-      let maxStreak = 1;
-      
-      for (let i = 1; i < uniqueDates.length; i++) {
-        const diff = differenceInDays(parseISO(uniqueDates[i]), parseISO(uniqueDates[i-1]));
-        if (diff === 1) {
-          currentTempStreak++;
-          maxStreak = Math.max(maxStreak, currentTempStreak);
-        } else {
-          currentTempStreak = 1;
-        }
-      }
-      
-      longestStreak = maxStreak;
-      
-      // Calculate current streak from today or yesterday
-      const todayStr = format(new Date(), "yyyy-MM-dd");
-      const yesterdayStr = format(subDays(new Date(), 1), "yyyy-MM-dd");
-      
-      if (uniqueDates.includes(todayStr) || uniqueDates.includes(yesterdayStr)) {
-        // Trace back from the latest active date
-        let latestDate = uniqueDates.includes(todayStr) ? new Date() : subDays(new Date(), 1);
-        let activeStreak = 0;
-        
-        while (true) {
-          const dateStr = format(subDays(latestDate, activeStreak), "yyyy-MM-dd");
-          if (uniqueDates.includes(dateStr)) {
-            activeStreak++;
-          } else {
-            break;
-          }
-        }
-        currentStreak = activeStreak;
-      }
-    }
-
     return {
       totalWorkouts,
-      workoutsThisMonth,
-      currentStreak,
-      longestStreak
+      workoutsThisMonth
     };
   }, [workouts]);
 

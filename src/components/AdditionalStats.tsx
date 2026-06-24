@@ -1,20 +1,21 @@
 "use client";
 
-import { Activity, Flame, Trophy, CalendarDays } from "lucide-react";
+import { Dumbbell, Calendar } from "lucide-react";
 
 interface AdditionalStatsProps {
   totalWorkouts: number;
   workoutsThisMonth: number;
-  currentStreak: number;
-  longestStreak: number;
 }
 
-export function AdditionalStats({ totalWorkouts, workoutsThisMonth, currentStreak, longestStreak }: AdditionalStatsProps) {
+export function AdditionalStats({ 
+  totalWorkouts, 
+  workoutsThisMonth 
+}: AdditionalStatsProps) {
   const stats = [
     {
       label: "Total Workouts",
       value: totalWorkouts,
-      icon: Activity,
+      icon: Dumbbell,
       color: "text-blue-400",
       bg: "bg-blue-500/10",
       border: "border-blue-500/20"
@@ -22,35 +23,19 @@ export function AdditionalStats({ totalWorkouts, workoutsThisMonth, currentStrea
     {
       label: "This Month",
       value: workoutsThisMonth,
-      icon: CalendarDays,
+      icon: Calendar,
       color: "text-green-400",
       bg: "bg-green-500/10",
       border: "border-green-500/20"
-    },
-    {
-      label: "Current Streak",
-      value: `${currentStreak} days`,
-      icon: Flame,
-      color: "text-orange-400",
-      bg: "bg-orange-500/10",
-      border: "border-orange-500/20"
-    },
-    {
-      label: "Longest Streak",
-      value: `${longestStreak} days`,
-      icon: Trophy,
-      color: "text-yellow-400",
-      bg: "bg-yellow-500/10",
-      border: "border-yellow-500/20"
     }
   ];
 
   return (
-    <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 md:gap-4 w-full pb-2 md:grid md:grid-cols-4 md:overflow-visible hide-scrollbar">
+    <div className="grid grid-cols-2 gap-3 w-full">
       {stats.map((stat, idx) => {
         const Icon = stat.icon;
         return (
-          <div key={idx} className={`min-w-[150px] flex-shrink-0 snap-center p-3 md:p-5 rounded-2xl border ${stat.border} bg-[#1e222a] flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 transition-transform hover:-translate-y-1 duration-300`}>
+          <div key={idx} className={`p-3 md:p-5 rounded-2xl border ${stat.border} bg-[#1e222a] flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 transition-transform hover:-translate-y-1 duration-300`}>
             <div className={`p-2.5 sm:p-3 rounded-xl ${stat.bg} ${stat.color}`}>
               <Icon size={22} className="sm:w-6 sm:h-6" />
             </div>

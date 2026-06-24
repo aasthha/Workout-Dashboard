@@ -5,7 +5,7 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-export type WorkoutCategory = "Legs" | "CST" | "BB" | "Arms" | "Cardio";
+export type WorkoutCategory = "Legs" | "CST" | "BB" | "Cardio";
 
 export interface Workout {
   id: string;

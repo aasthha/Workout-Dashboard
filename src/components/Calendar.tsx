@@ -47,7 +47,6 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
       case "Legs": return "bg-purple-500";
       case "CST": return "bg-blue-500";
       case "BB": return "bg-green-500";
-      case "Arms": return "bg-orange-500";
       case "Cardio": return "bg-red-500";
       default: return "bg-gray-500";
     }

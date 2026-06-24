@@ -15,7 +15,6 @@ export function DashboardStats({ stats }: { stats: CategoryStat[] }) {
       case "Legs": return "text-purple-400 border-purple-500/30 bg-purple-500/10";
       case "CST": return "text-blue-400 border-blue-500/30 bg-blue-500/10";
       case "BB": return "text-green-400 border-green-500/30 bg-green-500/10";
-      case "Arms": return "text-orange-400 border-orange-500/30 bg-orange-500/10";
       case "Cardio": return "text-red-400 border-red-500/30 bg-red-500/10";
       default: return "text-gray-400 border-gray-500/30 bg-gray-500/10";
     }
@@ -30,7 +29,7 @@ export function DashboardStats({ stats }: { stats: CategoryStat[] }) {
   };
 
   return (
-    <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 md:gap-4 w-full pb-2 md:grid md:grid-cols-5 md:overflow-visible hide-scrollbar">
+    <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 md:gap-4 w-full pb-2 md:grid md:grid-cols-4 md:overflow-visible hide-scrollbar">
       {stats.map((stat, idx) => {
         const recovery = getRecoveryStatus(stat.lastTrainedDate);
         // Removed mobile grid span logic
