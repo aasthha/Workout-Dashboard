@@ -3,35 +3,35 @@
 import { Dumbbell, Calendar, Coffee } from "lucide-react";
 
 interface AdditionalStatsProps {
-  totalWorkouts: number;
+  yearlyWorkouts: number;
   workoutsThisMonth: number;
   restDaysThisMonth: number;
 }
 
 export function AdditionalStats({ 
-  totalWorkouts, 
+  yearlyWorkouts, 
   workoutsThisMonth,
   restDaysThisMonth
 }: AdditionalStatsProps) {
   const stats = [
     {
-      label: "This Month",
+      label: "Workouts",
       value: workoutsThisMonth,
       icon: Calendar,
       color: "text-emerald-400",
       bg: "bg-emerald-500/10"
     },
     {
-      label: "Total",
-      value: totalWorkouts,
-      icon: Dumbbell,
+      label: "Rests",
+      value: restDaysThisMonth,
+      icon: Coffee,
       color: "text-emerald-400",
       bg: "bg-emerald-500/10"
     },
     {
-      label: "Rest Days",
-      value: restDaysThisMonth,
-      icon: Coffee,
+      label: "Yearly",
+      value: yearlyWorkouts,
+      icon: Dumbbell,
       color: "text-emerald-400",
       bg: "bg-emerald-500/10"
     }

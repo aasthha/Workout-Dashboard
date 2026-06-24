@@ -60,8 +60,9 @@ export default function Home() {
   }, [workouts]);
 
   const additionalStats = useMemo(() => {
-    const totalWorkouts = workouts.length;
     const today = new Date();
+    const currentYear = today.getFullYear();
+    const yearlyWorkouts = workouts.filter(w => parseISO(w.workout_date).getFullYear() === currentYear).length;
     const currentMonth = startOfMonth(today);
     
     const workoutsThisMonth = workouts.filter(w => isSameMonth(parseISO(w.workout_date), currentMonth)).length;
@@ -76,7 +77,7 @@ export default function Home() {
     const restDaysThisMonth = daysPassed - uniqueDaysThisMonth;
 
     return {
-      totalWorkouts,
+      yearlyWorkouts,
       workoutsThisMonth,
       restDaysThisMonth
     };
