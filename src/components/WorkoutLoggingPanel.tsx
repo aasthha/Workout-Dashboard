@@ -20,30 +20,23 @@ export function WorkoutLoggingPanel({
   onClose
 }: WorkoutLoggingPanelProps) {
   
-  const getCategoryStyles = (category: WorkoutCategory, isActive: boolean) => {
-    if (!isActive) return "bg-[#252a34] border-[#374151] text-white/60 hover:bg-[#2a303c] hover:border-white/20";
-    
-    switch (category) {
-      case "Legs": return "bg-purple-500 text-white border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)]";
-      case "CST": return "bg-blue-500 text-white border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.4)]";
-      case "BB": return "bg-green-500 text-white border-green-400 shadow-[0_0_15px_rgba(34,197,94,0.4)]";
-      case "Cardio": return "bg-red-500 text-white border-red-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]";
-      default: return "bg-gray-500 text-white border-gray-400";
-    }
+  const getCategoryStyles = (isActive: boolean) => {
+    if (!isActive) return "bg-gray-800 border-gray-700 text-gray-500 hover:bg-gray-700 hover:border-gray-600";
+    return "bg-emerald-500/10 text-emerald-500 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.1)]";
   };
 
   return (
-    <div className="bg-[#1e222a] border border-[#2d333b] rounded-xl p-3 shadow-xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+    <div className="bg-gray-800 border border-gray-700 rounded-xl p-3 shadow-xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
       <button 
         onClick={onClose}
-        className="absolute top-2 right-2 text-white/40 hover:text-white transition-colors bg-white/5 p-1 rounded-full hover:bg-white/10"
+        className="absolute top-2 right-2 text-gray-500 hover:text-white transition-colors bg-white/5 p-1 rounded-full hover:bg-white/10"
       >
         <X size={16} />
       </button>
 
       <div className="mb-2">
         <h3 className="text-base font-bold text-white mb-0">Log Workout</h3>
-        <p className="text-white/50 text-[10px] font-medium">{format(selectedDate, "EEEE, MMMM do, yyyy")}</p>
+        <p className="text-gray-400 text-[10px] font-medium">{format(selectedDate, "EEEE, MMMM do, yyyy")}</p>
       </div>
       
       <div className="flex flex-wrap gap-2">
@@ -55,12 +48,12 @@ export function WorkoutLoggingPanel({
               onClick={() => onToggleWorkout(category)}
               className={`
                 flex-1 min-w-[30%] flex items-center justify-between p-2 rounded-lg border-2 transition-all duration-200 group
-                ${getCategoryStyles(category, isActive)}
+                ${getCategoryStyles(isActive)}
               `}
             >
               <span className="font-bold tracking-wide text-sm">{category}</span>
-              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${isActive ? 'border-white bg-white/20' : 'border-white/20 group-hover:border-white/40'}`}>
-                {isActive && <Check size={10} strokeWidth={3} className="text-white" />}
+              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${isActive ? 'border-emerald-500 bg-emerald-500/20' : 'border-gray-600 group-hover:border-gray-500'}`}>
+                {isActive && <Check size={10} strokeWidth={3} className="text-emerald-500" />}
               </div>
             </button>
           );

@@ -42,25 +42,17 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
     end: isExpanded ? monthEndDate : weekEndDate
   });
 
-  const getCategoryColor = (category: WorkoutCategory) => {
-    switch (category) {
-      case "Legs": return "bg-purple-500";
-      case "CST": return "bg-blue-500";
-      case "BB": return "bg-green-500";
-      case "Cardio": return "bg-red-500";
-      default: return "bg-gray-500";
-    }
-  };
+
 
   return (
-    <div className="w-full bg-[#1e222a] border border-[#2d333b] rounded-xl p-2 shadow-xl">
+    <div className="w-full bg-gray-800 border border-gray-700 rounded-xl p-2 shadow-xl">
       <div className="flex justify-between items-center mb-2 px-1">
         <h2 className="text-base font-bold text-white tracking-tight">
           {format(currentDate, "MMMM yyyy")}
         </h2>
         <button 
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-1 text-xs font-semibold text-white/50 hover:text-white transition-colors bg-white/5 px-3 py-1.5 rounded-full"
+          className="flex items-center gap-1 text-xs font-semibold text-gray-400 hover:text-white transition-colors bg-white/5 px-3 py-1.5 rounded-full"
         >
           {isExpanded ? (
             <>Collapse <ChevronUp size={14} /></>
@@ -72,7 +64,7 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
       
       <div className="grid grid-cols-7 gap-1 md:gap-2 mb-2">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-          <div key={day} className="text-center text-xs font-semibold text-white/40 uppercase tracking-wider">
+          <div key={day} className="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
             {day}
           </div>
         ))}
@@ -90,25 +82,16 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
               onClick={() => onSelectDay(day)}
               className={`
                 min-h-[50px] p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
-                ${!isSameMonth(day, monthStart) ? 'opacity-30 bg-[#1e222a] border-transparent' : 'bg-[#252a34] border-[#374151] hover:border-white/30'}
-                ${isSelected ? 'ring-2 ring-white border-white scale-105 z-10' : ''}
-                ${isToday(day) && !isSelected ? 'border-blue-500/50 bg-blue-500/5' : ''}
+                ${!isSameMonth(day, monthStart) ? 'opacity-30 bg-gray-800 border-transparent' : 
+                  dayWorkouts.length > 0 ? 'bg-gray-700 border-gray-600 hover:border-gray-500' : 'bg-gray-800 border-gray-700 hover:border-gray-600'}
+                ${isSelected ? 'bg-emerald-500 text-white border-emerald-500 scale-105 z-10 shadow-lg shadow-emerald-500/20' : ''}
+                ${isToday(day) && !isSelected ? 'border-emerald-500/50' : ''}
               `}
             >
               <div className="flex justify-center items-start">
-                <span className={`text-xs font-medium ${isToday(day) ? 'text-blue-400 font-bold' : 'text-white/80'}`}>
+                <span className={`text-xs font-medium ${isSelected ? 'text-white' : isToday(day) ? 'text-emerald-400 font-bold' : 'text-gray-300'}`}>
                   {format(day, 'd')}
                 </span>
-              </div>
-              
-              <div className="mt-auto pt-2 flex flex-wrap gap-1">
-                {dayWorkouts.map((workout, idx) => (
-                  <div 
-                    key={idx}
-                    title={workout}
-                    className={`w-3 h-3 rounded-full ${getCategoryColor(workout)} shadow-[0_0_8px_rgba(255,255,255,0.2)]`}
-                  />
-                ))}
               </div>
             </div>
           );

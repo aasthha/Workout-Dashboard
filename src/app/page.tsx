@@ -113,11 +113,11 @@ export default function Home() {
     : [];
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center bg-[#0f1115] text-white">Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">Loading...</div>;
   }
 
   return (
-    <main className="min-h-[100dvh] p-2 max-w-6xl w-full mx-auto flex flex-col gap-2 overflow-hidden bg-[#0f1115]">
+    <main className="min-h-[100dvh] p-2 max-w-6xl w-full mx-auto flex flex-col gap-2 overflow-hidden bg-gray-900">
       <section className="w-full min-w-0 mt-2">
         <DashboardStats stats={dashboardStats} />
       </section>
