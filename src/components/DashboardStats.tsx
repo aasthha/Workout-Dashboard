@@ -39,7 +39,7 @@ export function DashboardStats({ stats }: { stats: CategoryStat[] }) {
               </div>
             </div>
             
-            <div className="text-[10px] text-gray-500 font-medium">
+            <div className="text-[10px] text-gray-400 font-medium">
               {formatLastTrained(stat.lastTrainedDate)}
             </div>
           </div>

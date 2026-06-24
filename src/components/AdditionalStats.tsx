@@ -22,7 +22,7 @@ export function AdditionalStats({
       bg: "bg-emerald-500/10"
     },
     {
-      label: "Total Workouts",
+      label: "Total",
       value: totalWorkouts,
       icon: Dumbbell,
       color: "text-emerald-400",

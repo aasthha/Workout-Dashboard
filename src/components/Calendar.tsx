@@ -30,13 +30,13 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
   const monthEnd = endOfMonth(monthStart);
   
   // Calculate full month days
-  const monthStartDate = startOfWeek(monthStart);
-  const monthEndDate = endOfWeek(monthEnd);
+  const monthStartDate = startOfWeek(monthStart, { weekStartsOn: 1 });
+  const monthEndDate = endOfWeek(monthEnd, { weekStartsOn: 1 });
   
   // Calculate current week days based on selectedDate or currentDate
   const activeDate = selectedDate || currentDate;
-  const weekStartDate = startOfWeek(activeDate);
-  const weekEndDate = endOfWeek(activeDate);
+  const weekStartDate = startOfWeek(activeDate, { weekStartsOn: 1 });
+  const weekEndDate = endOfWeek(activeDate, { weekStartsOn: 1 });
 
   const days = eachDayOfInterval({
     start: isExpanded ? monthStartDate : weekStartDate,
@@ -65,7 +65,7 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
       
 
       <div className="grid grid-cols-7 gap-1 md:gap-2 mb-2">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
           <div key={day} className="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
             {day}
           </div>
@@ -84,16 +84,15 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
               onClick={() => onSelectDay(day)}
               className={`
                 min-h-[42px] p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
-                ${isSelected 
-                  ? 'bg-emerald-500 text-white border-emerald-500 scale-105 z-10 shadow-lg shadow-emerald-500/20'
-                  : !isSameMonth(day, monthStart) 
-                    ? 'opacity-30 bg-gray-800 border-transparent' 
-                    : dayWorkouts.length === 1 
-                      ? `${CATEGORY_COLORS[dayWorkouts[0]].activeBg} ${CATEGORY_COLORS[dayWorkouts[0]].border} hover:brightness-110` 
-                      : dayWorkouts.length > 1
-                        ? 'bg-gray-700 border-gray-600 hover:border-gray-500'
-                        : 'bg-gray-800 border-gray-700 hover:border-gray-600'
+                ${!isSameMonth(day, monthStart) 
+                  ? 'opacity-30 bg-gray-800 border-transparent' 
+                  : dayWorkouts.length === 1 
+                    ? `${CATEGORY_COLORS[dayWorkouts[0]].activeBg} ${CATEGORY_COLORS[dayWorkouts[0]].border} hover:brightness-110` 
+                    : dayWorkouts.length > 1
+                      ? 'bg-gray-700 border-gray-600 hover:border-gray-500'
+                      : 'bg-gray-800 border-gray-700 hover:border-gray-600'
                 }
+                ${isSelected ? 'ring-1 ring-white border-white scale-105 z-10 shadow-lg' : ''}
                 ${isToday(day) && !isSelected ? 'border-emerald-500/50' : ''}
               `}
             >
@@ -105,19 +104,19 @@ export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: C
               
               <div className="mt-auto pt-1 flex justify-center items-center gap-0.5">
                 {dayWorkouts.length === 1 ? (
-                  <span className={`text-[9px] font-bold tracking-widest ${isSelected ? 'text-white' : CATEGORY_COLORS[dayWorkouts[0]].text}`}>
+                  <span className={`text-[9px] font-bold tracking-widest ${CATEGORY_COLORS[dayWorkouts[0]].text}`}>
                     {CATEGORY_COLORS[dayWorkouts[0]].abbr}
                   </span>
                 ) : dayWorkouts.length > 1 ? (
                   <div className="flex items-center gap-0.5">
                     {dayWorkouts.map((workout, idx) => (
                       <div key={idx} className="flex items-center gap-0.5">
-                        <div className={`w-1 h-1 rounded-full ${isSelected ? 'bg-white' : CATEGORY_COLORS[workout].dot}`} />
-                        <span className={`text-[8px] font-bold ${isSelected ? 'text-white' : 'text-gray-300'}`}>
+                        <div className={`w-1 h-1 rounded-full ${CATEGORY_COLORS[workout].dot}`} />
+                        <span className={`text-[8px] font-bold text-gray-300`}>
                           {CATEGORY_COLORS[workout].initial}
                         </span>
                         {idx < dayWorkouts.length - 1 && (
-                          <span className={`text-[8px] font-bold ${isSelected ? 'text-white/70' : 'text-gray-500'}`}>+</span>
+                          <span className={`text-[8px] font-bold text-gray-500`}>+</span>
                         )}
                       </div>
                     ))}
