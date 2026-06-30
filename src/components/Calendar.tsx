@@ -24,7 +24,7 @@ interface CalendarProps {
 }
 
 export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: CalendarProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(monthStart);
