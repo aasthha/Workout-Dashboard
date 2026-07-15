@@ -87,7 +87,7 @@ export default function Home() {
       workoutsThisMonth,
       restDaysThisMonth
     };
-  }, [workouts]);
+  }, [workouts, currentMonth]);
 
   // Handlers
   const handleToggleWorkout = async (category: WorkoutCategory) => {
