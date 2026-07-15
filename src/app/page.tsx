@@ -136,12 +136,12 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-[100dvh] p-2 max-w-6xl w-full mx-auto flex flex-col gap-2 overflow-hidden bg-gray-900">
-      <section className="w-full min-w-0 mt-2">
+    <main className="min-h-[100dvh] p-2 max-w-6xl w-full mx-auto flex flex-col gap-1.5 overflow-hidden bg-gray-900">
+      <section className="w-full min-w-0 mt-1">
         <DashboardStats stats={dashboardStats} />
       </section>
 
-      <section className="grid grid-cols-1 gap-2 w-full min-w-0">
+      <section className="grid grid-cols-1 gap-1.5 w-full min-w-0">
         <div className="w-full">
           <Calendar 
             currentMonth={currentMonth}

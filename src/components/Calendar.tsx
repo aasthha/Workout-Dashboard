@@ -38,15 +38,11 @@ export function Calendar({ currentMonth, onMonthChange, workouts, onSelectDay, s
     end: monthEndDate
   });
 
-  const numRows = days.length / 7;
-  // Dynamic tile height: 6 rows = compact, 5 rows = normal, 4 rows = spacious
-  const tileHeight = numRows >= 6 ? 'min-h-[34px]' : numRows >= 5 ? 'min-h-[40px]' : 'min-h-[48px]';
-
 
 
   return (
     <div className="w-full bg-gray-800 border border-gray-700 rounded-xl p-2 shadow-xl">
-      <div className="flex justify-between items-center mb-4 px-1">
+      <div className="flex justify-between items-center mb-2 px-1">
         <button 
           onClick={() => onMonthChange(subMonths(currentMonth, 1))}
           className="text-gray-400 hover:text-white transition-colors bg-white/5 p-1.5 rounded-lg hover:bg-white/10"
@@ -65,7 +61,7 @@ export function Calendar({ currentMonth, onMonthChange, workouts, onSelectDay, s
       </div>
       
 
-      <div className="grid grid-cols-7 gap-1 md:gap-2 mb-2">
+      <div className="grid grid-cols-7 gap-1 md:gap-2 mb-1">
         {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
           <div key={day} className="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
             {day}
@@ -84,7 +80,7 @@ export function Calendar({ currentMonth, onMonthChange, workouts, onSelectDay, s
               key={day.toString()}
               onClick={() => onSelectDay(day)}
               className={`
-                ${tileHeight} p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
+                min-h-[36px] p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
                 ${!isSameMonth(day, monthStart) 
                   ? 'opacity-30 bg-gray-800 border-transparent' 
                   : dayWorkouts.length === 1 

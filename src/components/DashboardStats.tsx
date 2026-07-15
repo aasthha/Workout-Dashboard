@@ -26,13 +26,13 @@ export function DashboardStats({ stats }: { stats: CategoryStat[] }) {
         return (
           <div 
             key={stat.category} 
-            className="p-3 rounded-xl border border-gray-700 bg-gray-800 flex flex-col items-center justify-center text-center transition-all active:scale-95 duration-300"
+            className="p-2 rounded-xl border border-gray-700 bg-gray-800 flex flex-col items-center justify-center text-center transition-all active:scale-95 duration-300"
           >
-            <div className="text-2xl font-bold mb-0.5 text-white tracking-tight">
+            <div className="text-xl font-bold mb-0.5 text-white tracking-tight">
               {stat.totalLogs}
             </div>
             
-            <div className="flex items-center gap-1.5 mb-2">
+            <div className="flex items-center gap-1.5 mb-1">
               <div className={`w-1.5 h-1.5 rounded-full ${CATEGORY_COLORS[stat.category].dot}`} />
               <div className="text-[11px] text-gray-400 font-semibold uppercase tracking-wider">
                 {stat.category}
