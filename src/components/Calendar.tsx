@@ -38,6 +38,10 @@ export function Calendar({ currentMonth, onMonthChange, workouts, onSelectDay, s
     end: monthEndDate
   });
 
+  const numRows = days.length / 7;
+  // Dynamic tile height: 6 rows = compact, 5 rows = normal, 4 rows = spacious
+  const tileHeight = numRows >= 6 ? 'min-h-[34px]' : numRows >= 5 ? 'min-h-[40px]' : 'min-h-[48px]';
+
 
 
   return (
@@ -80,7 +84,7 @@ export function Calendar({ currentMonth, onMonthChange, workouts, onSelectDay, s
               key={day.toString()}
               onClick={() => onSelectDay(day)}
               className={`
-                min-h-[42px] p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
+                ${tileHeight} p-1 rounded-lg cursor-pointer transition-all duration-200 border flex flex-col active:scale-95
                 ${!isSameMonth(day, monthStart) 
                   ? 'opacity-30 bg-gray-800 border-transparent' 
                   : dayWorkouts.length === 1 
