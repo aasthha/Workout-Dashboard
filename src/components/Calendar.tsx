@@ -10,56 +10,53 @@ import {
   eachDayOfInterval, 
   isSameMonth, 
   isSameDay, 
-  isToday 
+  isToday,
+  addMonths,
+  subMonths
 } from "date-fns";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CATEGORY_COLORS } from "@/lib/colors";
 
 interface CalendarProps {
-  currentDate: Date;
+  currentMonth: Date;
+  onMonthChange: (date: Date) => void;
   workouts: Record<string, WorkoutCategory[]>; // Map of YYYY-MM-DD -> categories
   onSelectDay: (date: Date) => void;
   selectedDate: Date | null;
 }
 
-export function Calendar({ currentDate, workouts, onSelectDay, selectedDate }: CalendarProps) {
-  const [isExpanded, setIsExpanded] = useState(true);
-
-  const monthStart = startOfMonth(currentDate);
+export function Calendar({ currentMonth, onMonthChange, workouts, onSelectDay, selectedDate }: CalendarProps) {
+  const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   
   // Calculate full month days
   const monthStartDate = startOfWeek(monthStart, { weekStartsOn: 1 });
   const monthEndDate = endOfWeek(monthEnd, { weekStartsOn: 1 });
-  
-  // Calculate current week days based on selectedDate or currentDate
-  const activeDate = selectedDate || currentDate;
-  const weekStartDate = startOfWeek(activeDate, { weekStartsOn: 1 });
-  const weekEndDate = endOfWeek(activeDate, { weekStartsOn: 1 });
 
   const days = eachDayOfInterval({
-    start: isExpanded ? monthStartDate : weekStartDate,
-    end: isExpanded ? monthEndDate : weekEndDate
+    start: monthStartDate,
+    end: monthEndDate
   });
 
 
 
   return (
     <div className="w-full bg-gray-800 border border-gray-700 rounded-xl p-2 shadow-xl">
-      <div className="flex justify-between items-center mb-2 px-1">
-        <h2 className="text-base font-bold text-white tracking-tight">
-          {format(currentDate, "MMMM yyyy")}
+      <div className="flex justify-between items-center mb-4 px-1">
+        <button 
+          onClick={() => onMonthChange(subMonths(currentMonth, 1))}
+          className="text-gray-400 hover:text-white transition-colors bg-white/5 p-1.5 rounded-lg hover:bg-white/10"
+        >
+          <ChevronLeft size={16} />
+        </button>
+        <h2 className="text-base font-bold text-white tracking-tight text-center">
+          {format(currentMonth, "MMMM yyyy")}
         </h2>
         <button 
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-1 text-xs font-semibold text-gray-400 hover:text-white transition-colors bg-white/5 px-3 py-1.5 rounded-full"
+          onClick={() => onMonthChange(addMonths(currentMonth, 1))}
+          className="text-gray-400 hover:text-white transition-colors bg-white/5 p-1.5 rounded-lg hover:bg-white/10"
         >
-          {isExpanded ? (
-            <>Collapse <ChevronUp size={14} /></>
-          ) : (
-            <>Expand <ChevronDown size={14} /></>
-          )}
+          <ChevronRight size={16} />
         </button>
       </div>
       

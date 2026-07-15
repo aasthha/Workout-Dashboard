@@ -6,13 +6,14 @@ import { DashboardStats } from "@/components/DashboardStats";
 import { Calendar } from "@/components/Calendar";
 import { WorkoutLoggingPanel } from "@/components/WorkoutLoggingPanel";
 import { AdditionalStats } from "@/components/AdditionalStats";
-import { startOfMonth, isSameMonth, differenceInDays, parseISO, format, subDays } from "date-fns";
+import { startOfMonth, isSameMonth, differenceInDays, parseISO, format, subDays, getDaysInMonth } from "date-fns";
 
 const CATEGORIES: WorkoutCategory[] = ["Legs", "CST", "BB", "Cardio"];
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [currentMonth, setCurrentMonth] = useState(startOfMonth(new Date()));
   const [loading, setLoading] = useState(true);
 
   // Fetch all workouts
@@ -61,20 +62,25 @@ export default function Home() {
 
   const additionalStats = useMemo(() => {
     const today = new Date();
-    const currentYear = today.getFullYear();
-    const yearlyWorkouts = workouts.filter(w => parseISO(w.workout_date).getFullYear() === currentYear).length;
-    const currentMonth = startOfMonth(today);
+    const currentYear = currentMonth.getFullYear();
     
-    const workoutsThisMonth = workouts.filter(w => isSameMonth(parseISO(w.workout_date), currentMonth)).length;
-    
-    const uniqueDaysThisMonth = new Set(
+    // Fix: count unique days with workouts in the year
+    const yearlyWorkouts = new Set(
       workouts
-        .filter(w => isSameMonth(parseISO(w.workout_date), today))
+        .filter(w => parseISO(w.workout_date).getFullYear() === currentYear)
         .map(w => w.workout_date)
     ).size;
     
-    const daysPassed = today.getDate();
-    const restDaysThisMonth = daysPassed - uniqueDaysThisMonth;
+    // Fix: count unique days with workouts in the current month
+    const workoutsThisMonth = new Set(
+      workouts
+        .filter(w => isSameMonth(parseISO(w.workout_date), currentMonth))
+        .map(w => w.workout_date)
+    ).size;
+    
+    const isViewingCurrentMonth = isSameMonth(currentMonth, today);
+    const daysPassed = isViewingCurrentMonth ? today.getDate() : getDaysInMonth(currentMonth);
+    const restDaysThisMonth = daysPassed - workoutsThisMonth;
 
     return {
       yearlyWorkouts,
@@ -138,7 +144,8 @@ export default function Home() {
       <section className="grid grid-cols-1 gap-2 w-full min-w-0">
         <div className="w-full">
           <Calendar 
-            currentDate={new Date()} 
+            currentMonth={currentMonth}
+            onMonthChange={setCurrentMonth}
             workouts={calendarWorkouts} 
             onSelectDay={setSelectedDate}
             selectedDate={selectedDate}
